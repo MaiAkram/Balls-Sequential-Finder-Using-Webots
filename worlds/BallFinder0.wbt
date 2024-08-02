@@ -1,0 +1,308 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Parquetry.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.19028463662081868 -0.8463133252586879 0.4975394582901599 5.434101110141947
+  position 0.38737793932618636 -0.8366638788694553 0.9124481338427283
+}
+TexturedBackground {
+  texture "empty_office"
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 3 3
+  floorAppearance Parquetry {
+    type "light strip"
+  }
+  wallHeight 0.2
+}
+Robot {
+  translation 1.250008660865346 -1.250000003978237 -0.002866487566104449
+  rotation -0.001506343970514849 1.231427611624257e-06 0.9999988654625195 3.1400000728807
+  children [
+    Camera {
+      translation 0.175 0 0.1
+      boundingObject Box {
+        size 0.05 0.05 0.05
+      }
+      physics Physics {
+      }
+    }
+    DEF ds7 DistanceSensor {
+      translation 0.175 -0.1 0.05
+      name "ds7"
+      boundingObject DEF ds Box {
+        size 0.05 0.05 0.05
+      }
+      physics DEF ds Physics {
+      }
+      lookupTable [
+        0 0 0
+        0.1 1000 0
+        0.2 400 0
+        0.3 50 0
+      ]
+      type "sonar"
+    }
+    DEF ds6 DistanceSensor {
+      translation 0.175 0.1 0.05
+      name "ds6"
+      boundingObject DEF ds Box {
+        size 0.05 0.05 0.05
+      }
+      physics DEF ds Physics {
+      }
+      lookupTable [
+        0 0 0
+        0.1 1000 0
+        0.2 400 0
+        0.3 50 0
+      ]
+      type "sonar"
+    }
+    DEF ds0 DistanceSensor {
+      translation 0.1 0.175 0.05
+      rotation 0 0 1 1.57
+      name "ds0"
+      boundingObject DEF ds Box {
+        size 0.05 0.05 0.05
+      }
+      physics Physics {
+      }
+      lookupTable [
+        0 0 0
+        0.1 1000 0
+        0.2 400 0
+        0.3 50 0
+      ]
+      type "sonar"
+    }
+    DEF ds1 DistanceSensor {
+      translation 0.1 -0.175 0.05
+      rotation 0 0 1 -1.57
+      name "ds1"
+      boundingObject DEF ds Box {
+        size 0.05 0.05 0.05
+      }
+      physics Physics {
+      }
+      lookupTable [
+        0 0 0
+        0.1 1000 0
+        0.2 400 0
+        0.3 50 0
+      ]
+      type "sonar"
+    }
+    DEF ds2 DistanceSensor {
+      translation 0.15 0 0.05
+      name "ds2"
+      boundingObject USE ds
+      physics Physics {
+      }
+      lookupTable [
+        0 0 0
+        0.1 1000 0
+        0.2 400 0
+        0.3 50 0
+      ]
+      type "infra-red"
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 1374.9037887446561
+        axis 0 1 0
+        anchor -0.01 -0.172 0.05
+      }
+      device [
+        RotationalMotor {
+          name "motor_2"
+        }
+        DEF PosSen PositionSensor {
+          name "PS_1"
+        }
+      ]
+      endPoint Solid {
+        translation -0.010051351990956539 -0.1720043381421622 0.050019221699021565
+        rotation -0.7505049493345236 -0.4672863849646475 -0.4673176173129528 1.8538973173086903
+        children [
+          DEF wheel_2 Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.05
+              radius 0.05
+            }
+          }
+        ]
+        name "wheel_2"
+        boundingObject USE wheel_2
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 839.0233533721074
+        axis 0 1 0
+        anchor -0.01 0.172 0.05
+      }
+      device [
+        RotationalMotor {
+          name "motor_1"
+        }
+        DEF PosSen PositionSensor {
+          name "PS_2"
+        }
+      ]
+      endPoint Solid {
+        translation -0.009989139130422776 0.17199573925240264 0.05002026053329118
+        rotation -0.7703911057702387 0.45102741310202454 -0.4506349040860067 4.455254986398766
+        children [
+          USE wheel_2
+        ]
+        name "wheel_1"
+        boundingObject DEF wheel Shape {
+          geometry Cylinder {
+            height 0.05
+            radius 0.05
+          }
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Body Pose {
+      translation 0 0 0.0515
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.3 1
+            emissiveColor 0.1 0 1
+          }
+          geometry Box {
+            size 0.3 0.3 0.1
+          }
+        }
+      ]
+    }
+  ]
+  boundingObject USE Body
+  physics Physics {
+  }
+  controller "BallFinder2"
+}
+DEF Rball Solid {
+  translation 0.875 0 0.09342527489456731
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0 0
+      }
+      geometry Sphere {
+        radius 0.1
+      }
+    }
+  ]
+  name "Rball"
+  boundingObject DEF Rball Shape {
+    appearance PBRAppearance {
+      baseColor 1 0 0
+      emissiveColor 1 0 0
+    }
+    geometry Sphere {
+      radius 0.1
+    }
+  }
+  physics Physics {
+  }
+  linearVelocity 0 0 -1.6284440282369423e-16
+}
+DEF Bball Solid {
+  translation -0.875 0 0.09342527489456731
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 1
+      }
+      geometry Sphere {
+        radius 0.1
+      }
+    }
+  ]
+  name "Bball"
+  boundingObject DEF Rball Shape {
+    appearance PBRAppearance {
+      baseColor 1 0 0
+      emissiveColor 1 0 0
+    }
+    geometry Sphere {
+      radius 0.1
+    }
+  }
+  physics Physics {
+  }
+  linearVelocity 0 0 -1.6284440282369423e-16
+}
+DEF Gball Solid {
+  translation 0 0.875 0.09342527489456731
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 1 0
+      }
+      geometry Sphere {
+        radius 0.1
+      }
+    }
+  ]
+  name "Gball"
+  boundingObject DEF Rball Shape {
+    appearance PBRAppearance {
+      baseColor 1 0 0
+      emissiveColor 1 0 0
+    }
+    geometry Sphere {
+      radius 0.1
+    }
+  }
+  physics Physics {
+  }
+  linearVelocity 0 0 -1.6284440282369423e-16
+}
+DEF Yball Solid {
+  translation 0 -0.875 0.09342527489456731
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 1 0
+      }
+      geometry Sphere {
+        radius 0.1
+      }
+    }
+  ]
+  name "Yball"
+  boundingObject DEF Rball Shape {
+    appearance PBRAppearance {
+      baseColor 1 1 0
+      emissiveColor 1 0 0
+    }
+    geometry Sphere {
+      radius 0.1
+    }
+  }
+  physics Physics {
+  }
+  linearVelocity 0 0 -1.6284440282369423e-16
+}
